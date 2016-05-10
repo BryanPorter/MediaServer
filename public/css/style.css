@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+@CHARSET "ISO-8859-1";
+
+/* navbar layouts */
+
+#navbutton {
+   border: 2px solid black;
+   border-radius: 0px;
+   height: 0%;
+   width: 25%;
+   margin: 0 5px 0 5px;
+   padding-left: 5px;
+   vertical-align: middle;
+   background-color: lightgray;
+   flex: 2 1;
+   -webkit-flex: 2 1;
+}
+
+#navbutton:hover, #navbutton:focus{
+   animation-duration: 1.0s;
+   animation-iteration-count: 1;
+   background-color: lightgreen;
+   color: white;
+   flex: 2 1;
+   -webkit-flex: 2 1;
+}
+
+.navbar {
+   display: flex;
+   display: -webkit-flex;
+   flex-direction: row;
+   margin-left: 20%;
+   margin-right: 20%;
+}
+
+
+
+
