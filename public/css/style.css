@@ -1,5 +1,11 @@
-@CHARSET "UTF-8";
+@charset "UTF-8";
 @CHARSET "ISO-8859-1";
+
+
+
+body{
+	background-color: #008080;
+}
 
 /* navbar layouts */
 
@@ -19,7 +25,7 @@
 #navbutton:hover, #navbutton:focus{
    animation-duration: 1.0s;
    animation-iteration-count: 1;
-   background-color: lightgreen;
+   background-color: #004482;
    color: white;
    flex: 2 1;
    -webkit-flex: 2 1;
@@ -34,5 +40,69 @@
 }
 
 
+/* Individual Results */
 
+.content{
+	float: left;
+	width: 100%;
+	height: 100%;
+}
+
+
+.item_container{
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	float: left;
+	margin-left: 15px;
+	margin-top: 25px;
+	border: 2px solid gray;
+	background-color: #00827F;
+}
+
+.item_image {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.item_image > img{
+	max-height: 100px;
+	margin: 5px 5px 5px 5px;
+}
+
+.item_container .hover-text{
+	text-align: center;
+	vertical-align: middle;
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	opacity: 0;
+	transition: opacity;
+}
+
+.hover-text{
+	background-color: rgba(0, 0, 0, 0.4);
+	padding: 5px 5px 5px 5px;
+	color: white;
+	display: table;
+	height: 95%;
+	width: 95%;
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+.item_container:hover .hover-text{
+	opacity: 1;
+	transition-duration: 1s;
+}
+
+.date_stamp {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
