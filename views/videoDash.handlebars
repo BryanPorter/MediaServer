@@ -1,0 +1,41 @@
+<div class="navbar">
+	{{> navbar }}
+</div>
+
+<div class="main">
+   <div class = "Content">
+      <div class = "display_items">
+         {{#each direct}}
+	     <div class = "item_container">
+            <div class = "item_image">
+               <img src= 'https://lh5.ggpht.com/Iy2SF6C-E54bW_AwwPfymQ__MqQgx_iPRnVjvsgI0BbXA3FFiJDU6R6EcqXAZQ9iviRT=w170' />
+            </div>
+
+		    <form class="" action="/movies" method="post">
+		       <input type="hidden" name="pathToFile" value="{{this}}">
+               <input type="submit" name="submit" class="hover-text" value="{{pathToRoot}}" >
+            </form>
+
+            <div class = "date_stamp">
+               {{this}}
+            </div>
+         </div>
+         {{/each}}
+
+         {{#each feed}}
+         <div class = "item_container">
+            <div class = "item_image">
+               <img src= "http://findicons.com/files/icons/1261/sticker_system/128/movie.png" />
+            </div>
+		    <form class="" action="/movies/watch" method="post">
+		       <input type="hidden" name="title" value="{{this}}">
+               <input type="submit" name="submit" class="hover-text" value="Click to Watch" >
+            </form>
+            <div class = "vid_title">
+               {{this}}
+            </div>
+         </div>
+         {{/each}}
+      </div>
+   </div>
+</div>

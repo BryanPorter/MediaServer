@@ -1,0 +1,38 @@
+<div class="navbar">
+	{{> navbar }}
+</div>
+
+<div class="main">
+   <div class = "Content">
+      <div class = "display_items">
+         {{#each direct}}
+	     <div class = "item_container">
+            <div class = "item_image">
+               <img src= 'https://lh5.ggpht.com/Iy2SF6C-E54bW_AwwPfymQ__MqQgx_iPRnVjvsgI0BbXA3FFiJDU6R6EcqXAZQ9iviRT=w170' />
+            </div>
+
+            <div class="hover-text">
+               Click to view contents
+            </div>
+            <div class = "date_stamp">
+               {{this}}
+            </div>
+         </div>
+         {{/each}}
+
+         {{#each feed}}
+         <div class = "item_container">
+            <div class = "item_image">
+               <img src= 'images\\{{this}}?dim=100x100' />
+            </div>
+            <div class="hover-text">
+               {{this}}
+            </div>
+            <div class = "date_stamp">
+               October 16, 1992
+            </div>
+         </div>
+	     {{/each}}
+      </div>
+   </div>
+</div>

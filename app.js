@@ -3,20 +3,21 @@ var bodyParser	= require('body-parser');
 var express 	= require('express');
 var exphbs 		= require('express-handlebars');
 var path    	= require('path');
-var session		= require('express-session');
+var session		= require('client-sessions');
 
 var movieRoutes	= require('./routes/movies');
 var musicRoutes = require('./routes/music');
 var photoRoutes = require('./routes/photos');
 var db 			= require('./db')
+
 var app 		= express()
 
 app.use( session ({
-   cookieName: 'session'
-   , secret: 'OBabwUaC!wcpwnfcBOibuir&fawnGa' //RWE300
-   , resave: false
-   , saveUnititialized: true
-})) 
+   cookieName: 'session',
+   secret: 'OBabwUaC!wcpwnfcBOibuir&fawnGa', //RWE300
+   duration: 120*60*1000,
+   activeDuration: 60*60*1000
+})); 
 
 app.engine('handlebars', exphbs({defaultLayout: 'base'}));
 app.set('view engine', 'handlebars');
@@ -29,7 +30,7 @@ app.use('/photos', photoRoutes)
 
 
 app.get('/', function(req, res) {
-   res.render('dashboard', {
+   res.render('videoDash', {
 	   layout: 'auth_base',
 	   title: 'Home Page'  
    })

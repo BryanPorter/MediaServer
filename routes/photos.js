@@ -8,13 +8,13 @@ var mongodb		= require('mongodb');
 
 router.use(bodyParser.urlencoded({ extended: false}))
 
-router.use(express.static(path.join(__dirname, '..\public')));
+router.use(express.static(path.join(__dirname, '..', 'public')));
 
 router.get('/', function(req, res){
 
 	pathToFile = path.join(__dirname, '..', 'public', 'images');
 	
-	res.render('dashboard', {
+	res.render('imageDash', {
 		layout: 'auth_base',
 		title: 'Photo Library',
 		direct: getDirectories(pathToFile),
