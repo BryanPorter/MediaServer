@@ -1,0 +1,23 @@
+<h1>Create A New Account</h1>
+
+{{#if message}}
+	<p style="color: red">
+		{{message}}
+	</p>
+{{/if}}
+<p>
+   Enter your information below:
+</p><p></p>
+
+<form action="/newuser" method="post">
+   First Name:
+   <input type="text" name="firstName" value=""></p>
+   Desired Username:
+   <input type="text" name="userName" value=""></p>
+   Password:
+   <input type="password" name="password" value=""></p>
+   Re-type Password:
+   <input type="password" name="repassword" value=""></p>
+   
+   <input type="submit" name="submit" id="navbutton" value="Submit" >
+</form>

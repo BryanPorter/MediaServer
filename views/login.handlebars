@@ -1,1 +1,17 @@
-## This is the login page
+<h1>Sign In</h1>
+
+<p></p><p></p>
+
+{{#if message}}
+	<p>
+		{{message}}
+	</p>
+{{/if}}
+
+<form class="" action="/login/" method = "post">
+   User Name:
+   <input type="text" name="userName" value=""/></p>
+   Password:
+   <input type="password" name="password" value=""/></p>
+   <input type="submit" name="submit" id="navbutton" value="Submit" />
+</form>

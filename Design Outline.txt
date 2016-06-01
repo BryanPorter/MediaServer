@@ -1,0 +1,184 @@
+Used to view: Movies, Music, Pictures
+
+Uses username and password login
+  Stores user information on mlab
+  
+
+Admin rights:
+  View user activity through logging
+  restrict user activity
+  approve user log in information
+
+###### VARIABLE ATTRIBUTES ######
+
+User Profile Information:
+  Set initially:
+    First Name
+    User Name
+    Password
+  Set on Approval: Can be changed upon request
+    Access Levels
+      Based on ratings, admin rights
+    messaging rights
+    Upload Rights
+  Set through site use:
+    Pending Flags (max. 5)
+    Groups-default to all
+    userBio
+
+Video Information:
+  File Name- "userVideo-{{datestamp}}
+  title
+  length
+  rating
+  image
+  contributor-username
+  privacy (groups that can access it)
+  flags (if applicable)
+  Comments
+    Filter on all comments
+
+Image Information:
+  File Name
+  contributor
+  description
+  flags
+  comments
+  thumb location
+
+Music Information:
+  File Name
+  Contributor
+  flags
+  artist
+  album
+  artwork
+  length
+
+
+###### FUNCTIONALITIES ######
+
+Adding new media:
+  Check media type for compatibility prior to upload
+  Sorting Filters
+  Set Media Info
+  Set Group/privacy restrictions
+  
+Messaging within the site:
+  Comments on media
+  Flaggin innappropriate media
+  Flag miscategorized/broken media
+  Flag mislabeled media
+  request permissions
+
+###### PREVIEWS / APPEARANCE ######
+
+Video Preview Window:
+  Title Below the icon
+  Movie Image with hover action
+  Hover icon shows length, rating and contributor
+  Ability to filter results
+
+Image Preview:
+  Has thumbnail image
+  contributor on hover
+  image description
+
+Music Preview Windows:  
+  Album Art
+  Hover shows Title, length, artist, contributor
+  Onclick launches large viewer
+  
+Top Menu:
+  Navigation bar
+  Find/Create Group
+  Profile Information
+  Privacy
+  Logout
+
+Base of page:
+  Upload Menu
+  Any Message (Disclaimer)
+
+Profile Page:
+  Shows User Info
+  User Bio- used to request permissions
+    can have public/private setting
+  Username
+  Access level:
+   Upload
+   Content permissions (ratings)
+  Groups(led/followed)
+   -monitoring for private groups
+  Requests for permission changes
+
+Session settings:
+  Current Username
+  First Name
+  Automatic timeout
+  Permission level
+  Groups
+  
+Account Creation:
+  First Name
+  Username 8+ alphanumeric
+  Password: 8+ alphanumeric
+  Account Disclaimer
+
+Admin Page:
+  *Option only available for administrators
+  Monitors use (able to view logging
+  Edit/approve media on the site
+  Edit/approve user request
+  Resolve Flags on Media
+  Monitory user activity/permissions
+
+Group Monitoring:
+  Group leader, and group memebers, and content
+  Members can submit media for group
+  Leaders approve/deny content
+  Leaders approve/deny membership
+  Group description
+  Group Name
+  Group Conversation?
+
+
+###### Mongo Data ######
+
+Users:
+  Fname-string
+  Username-string 8+ char
+  password-string 8+ char
+  rights-numeric 
+  Groups-array of strings
+  
+Movies:
+  fileLocation- string
+  title- string
+  year- 
+  runtime- int minutes
+  rated- string
+  imdbRating- number
+  plot- string
+  groups- string, set by admin, or group leader
+
+Photos:
+  fileLocation- string
+  title- string
+  year- 
+  runtime- int minutes
+  rated- string
+  imdbRating- number
+  plot- string
+  groups- string, set by admin, or group leader
+
+Groups:
+  groupName: string
+  groupDescription: string
+  users: array of usernames
+  MovieArray: array of filenames
+  musicArray: array of filenames
+  photoarray: array of filenames
+  
+
+
