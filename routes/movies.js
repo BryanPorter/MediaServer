@@ -49,7 +49,6 @@ router.get('/', function(req, res){
       Users.find('videos', function(collection) {
          for(var k in collection){
             if(listOfMimetypes.indexOf(collection[k].mimetype) == -1){
-               console.log(collection[k]);
 			   fs.unlink('./public/videos/' + collection[k].fileName);
 			   Users.remove('videos', collection[k]);
 			   collection.splice(k, 1);
@@ -67,7 +66,7 @@ router.get('/', function(req, res){
    }
 })
 
-router.post('/', function(req, res){
+/* router.post('/', function(req, res){
    delete req.session.message;
 
    var userName = req.session.userName;
@@ -88,7 +87,7 @@ router.post('/', function(req, res){
       });
    }
 })
-
+ */
 router.post('/watch', function(req, res) {
    delete req.session.message;
 
@@ -99,16 +98,16 @@ router.post('/watch', function(req, res) {
    else {
       Users.findOne({'fileName': req.body.item}, 'videos', function(item) {
          if(!item){
-            res.redirect('/videos/');
 		    console.log('Error finding video in the database');
+            res.redirect('/videos/');
          } else {
+            console.log(req.session.userName + ' is watching ' + item.originalname);
             res.render('videoPlayer', {
                layout: 'auth_base',
                item: item,
                source: path.join(req.session.lastPage, item.fileName),
                username: userName
             });
-		    console.log(req.session.userName + ' is watching ' + item.originalname);
          }
       })
    }
@@ -129,8 +128,24 @@ router.post('/upload', function(req, res){
                res.redirect('/movies');
             }
             else {
-               req.session.message = 'File Upload Successful';
-			   res.redirect('/movies');
+               var options = {
+				   url: 'http://www.omdbapi.com/?t='+ req.body.Title+'&y=&plot=short&r=json'
+			   }
+			   request.get(options, function(error, response, body){
+				   var feed = JSON.parse(body);
+				   feed.filename = res.req.file.filename;
+				   
+				   if(feed.response == 'False'){
+                      feed.Poster = 'http://findicons.com/files/icons/1261/sticker_system/128/movie.png';
+                   }
+                   res.render('editMedia',{
+                         layout: 'auth_base',
+                         message: 'File Upload Successful',
+                         type: 'movies',
+                         object: feed
+                     });
+
+			   })
 			}
          });
       }
@@ -139,6 +154,15 @@ router.post('/upload', function(req, res){
          res.redirect('/movies');
       }
    }
+});
+
+router.post('/edit', function(req, res) {
+	delete req.body.submit;
+	console.log(req.body);
+	
+	Users.update(req.body, 'videos', function() {
+		res.redirect('/movies');
+	})
 });
 
 module.exports = router

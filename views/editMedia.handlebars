@@ -1,0 +1,31 @@
+<h1>Edit File Information</h1>
+
+{{#if message}}
+	<p>
+		{{message}}
+	</p>
+{{/if}}
+<p>
+<img style="margin-left: 80px" src="{{object.Poster}}"/>
+</p><p></p>
+   Enter information below:
+</p><p></p>
+
+<form action="/{{type}}/edit" method="post">
+   Title:
+   <input type="text" name="Title" value="{{object.Title}}"></p>
+   Rating:
+   <input type="text" name="Rating" value="{{object.Rated}}"></p>
+   Popularity:
+   <input type="text" name="Popularity" value="{{object.imdbRating}}"></p>
+   Year:
+   <input type="text" name="Year" value="{{object.Year}}"></p>
+   Director:
+   <input type="text" name="Director" value="{{object.Director}}"></p>
+   Plot:
+   <input type="textare" name="Plot" value="{{object.Plot}}"></p>
+   <input type="hidden" name="filename" value="{{object.filename}}">
+   <input type="hidden" name="Poster" value="{{object.Poster}}">
+   
+   <input type="submit" name="submit" id="navbutton" value="Submit" >
+</form>

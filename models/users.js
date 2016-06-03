@@ -21,16 +21,16 @@ exports.findOne = function(id, col, callback) {
 	});
 }
  
-exports.update = function(user, col, callback) {
+exports.update = function(obj, col, callback) {
 	var collection = db.get().collection(col);
 
-	//update the user
-	collection.update({'_id': ObjectId(user._id)}, user, function(err, result) {
+	//update the file info
+	collection.update({'fileName': obj.filename}, {$set:obj}, function(err, result) {
 		assert.equal(err, null);
 		assert.equal(1, result.result.n);
 		callback(result);
 	})
-}
+} 
 
 exports.find = function(col, callback) {
 	var collection = db.get().collection(col);

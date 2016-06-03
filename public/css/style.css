@@ -46,6 +46,20 @@ body{
    margin-right: 20%;
 }
 
+/*   ul {list-style: none;padding: 0px;margin: 0px;}
+  ul li {display: block;position: relative;float: left;}
+  li ul {display: none;}
+  ul li a {display: block;background: #000;padding: 5px 10px 5px 10px;text-decoration: none;
+           white-space: nowrap;color: #fff;}
+  ul li a:hover {background: #f00;}
+  li:hover ul {display: block; position: absolute;}
+  li:hover li {float: none;}
+  li:hover a {background: #f00;}
+  li:hover li a:hover {background: #000;}
+.drop-nav li ul li {
+	float: right;
+} */
+
 
 /* Footer Layout */
 
@@ -102,7 +116,7 @@ body{
 }
 
 .item_image > img{
-	max-height: 100px;
+	max-height: 250px;
 	margin: 5px 5px 5px 5px;
 }
 
