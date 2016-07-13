@@ -6,12 +6,12 @@
 	</p>
 {{/if}}
 <p>
+<form action="/{{type}}/edit" method="post">
 <img style="margin-left: 80px" src="{{object.Poster}}"/>
 </p><p></p>
    Enter information below:
 </p><p></p>
-
-<form action="/{{type}}/edit" method="post">
+   <input type="checkbox" name="Poster" />
    Title:
    <input type="text" name="Title" value="{{object.Title}}"></p>
    Rating:

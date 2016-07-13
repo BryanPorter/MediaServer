@@ -37,8 +37,12 @@ app.use('/photos', photoRoutes);
 db.connect('mongodb://user:' + cfg.mongo_pw + '@ds023042.mlab.com:23042/mediaserver', function(err) {
 
    if(err) {
-      console.log('Unable to connect to Mongo.')
-      process.exit(1)
+      console.log('Unable to connect to Mongo')
+	  console.log(err);
+//      process.exit(1)
+      app.listen(3030, function() {
+         console.log('Listening on port 3030...')
+      })
    } else {
       app.listen(3030, function() {
          console.log('Listening on port 3030...')
