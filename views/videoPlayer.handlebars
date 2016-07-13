@@ -7,8 +7,14 @@
    <div class="playerBox">
       <button id="navbutton" style="width:125px" onclick= "parent.location.href='/movies'">Back to Dash</button>
       <p><p><p><p>
-      <h2> {{item.title}} </h2>
+      <h2> {{item.Title}} </h2>
       <p><p>
       <video class="videoPlayer" src="{{source}}" controls> </video>
    </div>
 </div>
+
+<form action="/movies/editInfo" method="post">
+</p><p></p>
+   <input type="hidden" name="fileName" value="{{item.fileName}}">
+   <input type="submit" name="submit" id="navbutton" value="Edit Information" >
+</form>

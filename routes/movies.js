@@ -101,7 +101,7 @@ router.post('/watch', function(req, res) {
 		    console.log('Error finding video in the database');
             res.redirect('/videos/');
          } else {
-            console.log(req.session.userName + ' is watching ' + item.originalname);
+            console.log(req.session.userName + ' is watching ' + item.Title);
             res.render('videoPlayer', {
                layout: 'auth_base',
                item: item,
@@ -156,9 +156,59 @@ router.post('/upload', function(req, res){
    }
 });
 
+
+router.post('/editInfo', function(req, res){
+   delete req.session.message;
+
+   if(req.session.userName == undefined){
+      res.redirect('/');
+   }
+   else {
+      if(req.body.submit == 'Edit Information'){
+         Users.findOne({'fileName': req.body.fileName}, 'videos', function(item) {
+            if(!item){
+		       console.log('Error finding video in the database');
+               res.redirect('/movies/');
+            }
+            else {
+               res.render('editMedia', {
+                  layout: 'auth_base',
+                  type: 'movies',
+                  object: item
+               })
+	        }
+         })
+      }
+      else{
+         if(req.body.Title != '') {
+            var options = {
+               url: 'http://www.omdbapi.com/?t='+ req.body.Title+'&y=&plot=short&r=json'
+            }
+            request.get(options, function(error, response, body){
+               var feed = JSON.parse(body);
+               feed.filename = req.body.filename;
+		   		   
+               if(feed.response == 'False'){
+                  feed.Poster = 'http://findicons.com/files/icons/1261/sticker_system/128/movie.png';
+               }
+               res.render('editMedia',{
+                  layout: 'auth_base',
+                  type: 'movies',
+                  object: feed
+               });
+            })
+         }
+         else {
+		     //Delete uploaded video before redirecting
+            req.session.message = 'Movie title required to search for information';
+//            res.redirect('/movies');
+         }
+      }
+   }
+});
+
 router.post('/edit', function(req, res) {
 	delete req.body.submit;
-	console.log(req.body);
 	
 	Users.update(req.body, 'videos', function() {
 		res.redirect('/movies');

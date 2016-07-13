@@ -9,9 +9,10 @@
 <form action="/{{type}}/edit" method="post">
 <img style="margin-left: 80px" src="{{object.Poster}}"/>
 </p><p></p>
-   Enter information below:
+   Confirm/Enter information below:
 </p><p></p>
-   <input type="checkbox" name="Poster" />
+   Image Unavailable? Check Here
+   <input type="checkbox" name="Poster" /></p>
    Title:
    <input type="text" name="Title" value="{{object.Title}}"></p>
    Rating:
@@ -23,9 +24,19 @@
    Director:
    <input type="text" name="Director" value="{{object.Director}}"></p>
    Plot:
-   <input type="textare" name="Plot" value="{{object.Plot}}"></p>
+   <textarea rows="6" cols="100" name="Plot" >{{object.Plot}}</textarea></p>
    <input type="hidden" name="filename" value="{{object.filename}}">
    <input type="hidden" name="Poster" value="{{object.Poster}}">
    
    <input type="submit" name="submit" id="navbutton" value="Submit" >
+</form>
+
+<form action="/{{type}}/editInfo" method="post">
+</p><p></p>
+   Not the correct Film?</p>
+   Title:
+   <input type="text" name="Title" value="{{object.Title}}"></p>
+   <input type="hidden" name="filename" value="{{object.filename}}">
+   
+   <input type="submit" name="searchAgain" id="navbutton" value="Search Again" >
 </form>
