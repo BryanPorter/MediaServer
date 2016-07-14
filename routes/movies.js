@@ -159,6 +159,7 @@ router.post('/upload', function(req, res){
 
 router.post('/editInfo', function(req, res){
    delete req.session.message;
+   console.log(req.body);
 
    if(req.session.userName == undefined){
       res.redirect('/');
@@ -186,7 +187,7 @@ router.post('/editInfo', function(req, res){
             }
             request.get(options, function(error, response, body){
                var feed = JSON.parse(body);
-               feed.filename = req.body.filename;
+               feed.fileName = req.body.fileName;
 		   		   
                if(feed.response == 'False'){
                   feed.Poster = 'http://findicons.com/files/icons/1261/sticker_system/128/movie.png';
@@ -208,11 +209,16 @@ router.post('/editInfo', function(req, res){
 });
 
 router.post('/edit', function(req, res) {
-	delete req.body.submit;
-	
-	Users.update(req.body, 'videos', function() {
-		res.redirect('/movies');
-	})
+   delete req.body.submit;
+   console.log(req.body); 
+   if(req.body.PosterImage == 'on'){
+      req.body.Poster = 'http://findicons.com/files/icons/1261/sticker_system/128/movie.png';
+   }
+   delete req.body.PosterImage;
+   Users.update(req.body, 'videos', function() {
+      console.log(req.session.userName + ' changed the information for ' + req.body.Title);
+      res.redirect('/movies');
+   })
 });
 
 module.exports = router

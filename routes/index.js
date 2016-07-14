@@ -15,25 +15,35 @@ router.use(bodyParser.urlencoded({ extended: false}))
 
 
 router.get('/', function(req, res) {
-   var message = req.session.message;
-   delete req.session.message;
+   if(req.session.userName){
+      res.redirect('/movies');
+   }
+   else{
+      var message = req.session.message;
+      delete req.session.message;
 
-   res.render('home', {
-	   layout: 'auth_base',
-	   title: 'Home Page',
-       message: message
-   }); 
+      res.render('home', {
+         layout: 'auth_base',
+         title: 'Home Page',
+         message: message
+      }); 
+   }
 })
 
 router.get('/login', function(req, res){
-   var message = req.session.message;
-   delete req.session.message;
+   if(req.session.userName){
+      res.redirect('/movies');
+   }
+   else{
+      var message = req.session.message;
+      delete req.session.message;
 
-   res.render('login', {
-      layout: 'auth_base',
-      title: 'User Login',
-      message: message
-   });
+      res.render('login', {
+         layout: 'auth_base',
+         title: 'User Login',
+         message: message
+      });
+   }
 })
 
 router.post('/login', function(req, res) {
@@ -63,6 +73,11 @@ router.post('/login', function(req, res) {
          }
       }
    })
+})
+
+router.get('/logout', function(req, res){
+	delete req.session.userName;
+	res.redirect('/');
 })
 
 router.get('/newuser', function(req, res) {

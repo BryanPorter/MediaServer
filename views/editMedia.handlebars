@@ -12,7 +12,7 @@
    Confirm/Enter information below:
 </p><p></p>
    Image Unavailable? Check Here
-   <input type="checkbox" name="Poster" /></p>
+   <input type="checkbox" name="PosterImage" /></p>
    Title:
    <input type="text" name="Title" value="{{object.Title}}"></p>
    Rating:
@@ -25,7 +25,7 @@
    <input type="text" name="Director" value="{{object.Director}}"></p>
    Plot:
    <textarea rows="6" cols="100" name="Plot" >{{object.Plot}}</textarea></p>
-   <input type="hidden" name="filename" value="{{object.filename}}">
+   <input type="hidden" name="fileName" value="{{object.fileName}}">
    <input type="hidden" name="Poster" value="{{object.Poster}}">
    
    <input type="submit" name="submit" id="navbutton" value="Submit" >
@@ -36,7 +36,7 @@
    Not the correct Film?</p>
    Title:
    <input type="text" name="Title" value="{{object.Title}}"></p>
-   <input type="hidden" name="filename" value="{{object.filename}}">
+   <input type="hidden" name="fileName" value="{{object.fileName}}">
    
    <input type="submit" name="searchAgain" id="navbutton" value="Search Again" >
 </form>

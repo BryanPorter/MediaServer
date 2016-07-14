@@ -25,7 +25,7 @@ exports.update = function(obj, col, callback) {
 	var collection = db.get().collection(col);
 
 	//update the file info
-	collection.update({'fileName': obj.filename}, {$set:obj}, function(err, result) {
+	collection.update({'fileName': obj.fileName}, {$set:obj}, function(err, result) {
 		assert.equal(err, null);
 		assert.equal(1, result.result.n);
 		callback(result);
