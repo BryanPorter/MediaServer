@@ -1,13 +1,9 @@
-<div class="navbar">
-	{{> navbar }}
-</div>
-
 
 <div class="content">
    <div class="playerBox">
       <button id="navbutton" style="width:125px" onclick= "parent.location.href='/movies'">Back to Dash</button>
       <p><p><p><p>
-      <h2> {{item.Title}} - {{item.Rating}} </h2>
+      <h2> {{item.Title}} </h2>
       <p><p>
       <video class="videoPlayer" src="{{source}}" controls> </video>
 	  <h3>{{item.Year}} - {{item.Plot}} Director(s): {{item.Director}} </h3>

@@ -7,15 +7,21 @@ var router		= express.Router();
 var mongodb		= require('mongodb');
 
 router.use(bodyParser.urlencoded({ extended: false}))
-
 router.use(express.static(path.join(__dirname, '..', 'public')));
+router.use(function(req, res, next) { //Middleware to ensure a valid session
+  if(req.session.userName == undefined){
+    res.redirect('/login');
+    return;
+  }
+  next();
+});
 
 router.get('/', function(req, res){
 
 	pathToFile = path.join(__dirname, '..', 'public', 'images');
 	
 	res.render('imageDash', {
-		layout: 'auth_base',
+      layout: req.session.layout,
 		title: 'Photo Library',
 		direct: getDirectories(pathToFile),
 		feed: getFiles(pathToFile),

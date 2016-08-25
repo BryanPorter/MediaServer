@@ -14,7 +14,7 @@ router.get('/', function(req, res){
    pathToFile = path.join(__dirname, '..', 'public', 'videos');
 
 	res.render('dashboard', {
-		layout: 'auth_base',
+		layout: 'base',
 		title: 'Movie Library',
 		feed: getFiles(pathToFile),
 		direct: getDirectories(pathToFile)
