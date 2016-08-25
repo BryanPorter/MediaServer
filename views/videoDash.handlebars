@@ -7,15 +7,31 @@
          {{#each feed}}
          <div class = "item_container">
             <div class = "item_image">
-               <img src= "{{this.Poster}}" />
+               <img src= "/movies/get_image/?image_id={{this.poster_path}}" />
             </div>
-		    <form class="" action="/movies/watch" method="post">
-		       <input type="hidden" name="item" value="{{this.fileName}}">
+		        <form class="" action="/movies/watch" method="post">
+		           <input type="hidden" name="item" value="{{this.fileName}}">
                <input type="submit" name="submit" class="hover-text" value="Click to Watch" >
             </form>
 <!--             <div class = "vid_title">
                {{this.Title}}
             </div> -->
+         </div>
+         {{/each}}
+      </div>
+      <div class = "display_items">
+         {{#each customFeed}}
+         <div class = "item_container">
+            <div class = "item_image">
+               <img src= "{{this.Poster}}" />
+            </div>
+		        <form class="" action="/movies/watch" method="post">
+		           <input type="hidden" name="item" value="{{this.fileName}}">
+               <input type="submit" name="submit" class="hover-text" value="Click to Watch" >
+            </form>
+              <div class = "vid_title">
+               {{this.Title}}
+            </div>
          </div>
          {{/each}}
       </div>

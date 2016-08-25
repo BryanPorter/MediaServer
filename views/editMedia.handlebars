@@ -7,36 +7,38 @@
 {{/if}}
 <p>
 <form action="/{{type}}/edit" method="post">
-<img style="margin-left: 80px" src="{{object.Poster}}"/>
+<img style="margin-left: 80px" src="/movies/get_image/?image_id={{object.poster_path}}"/>
 </p><p></p>
    Confirm/Enter information below:
 </p><p></p>
    Image Unavailable? Check Here
    <input type="checkbox" name="PosterImage" /></p>
    Title:
-   <input type="text" name="Title" value="{{object.Title}}"></p>
-   Rating:
-   <input type="text" name="Rating" value="{{object.Rated}}"></p>
+   <input type="text" name="title" value="{{object.title}}"></p>
+<!--   Rating:
+   <input type="text" name="Rating" value="{{object.backdrop_path}}"></p> -->
    Popularity:
-   <input type="text" name="Popularity" value="{{object.imdbRating}}"></p>
-   Year:
-   <input type="text" name="Year" value="{{object.Year}}"></p>
+   <input type="text" name="vote_average" value="{{object.vote_average}}"></p>
+   Release Date:
+   <input type="text" name="release_date" value="{{object.release_date}}"></p>
    Director:
    <input type="text" name="Director" value="{{object.Director}}"></p>
    Plot:
-   <textarea rows="6" cols="100" name="Plot" >{{object.Plot}}</textarea></p>
+   <textarea rows="6" cols="100" name="overview" >{{object.overview}}</textarea></p>
    <input type="hidden" name="fileName" value="{{object.fileName}}">
-   <input type="hidden" name="Poster" value="{{object.Poster}}">
+   <input type="hidden" name="poster_path" value="{{object.poster_path}}">
+   <input type="hidden" name="backdrop_path" value="{{object.backdrop_path}}">
    
-   <input type="submit" name="submit" id="navbutton" value="Submit" >
+   <input type="submit" name="submit" id="navbutton" value="Submit">
 </form>
 
 <form action="/{{type}}/editInfo" method="post">
 </p><p></p>
    Not the correct Film?</p>
    Title:
-   <input type="text" name="Title" value="{{object.Title}}"></p>
+   <input type="text" name="title" value="{{object.title}}"></p>
    <input type="hidden" name="fileName" value="{{object.fileName}}">
    
    <input type="submit" name="searchAgain" id="navbutton" value="Search Again" >
 </form>
+<h5>*This product uses the TMDb API but is not endorsed or certified by TMDb.</h5>
