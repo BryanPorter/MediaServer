@@ -3,3 +3,7 @@ node_modules/**/*
 public/videos/**/*
 public/images/**/*
 config.js
+server.crt
+server.csr
+server.key
+server.key.org

@@ -18,7 +18,7 @@ var app 		= express()
 
 app.use( session ({
    cookieName: 'session',
-   secret: 'OBabwUaC!wcpwnfcBOibuir&fawnGa', //RWE300
+   secret: cfg.secret, //RWE300
    duration: 120*60*1000,
    activeDuration: 60*60*1000
 })); 

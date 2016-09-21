@@ -89,6 +89,7 @@ router.post('/watch', function(req, res) {
             res.redirect('/movies/');
          } else {
             console.log(req.session.userName + ' is watching ' + item.Title);
+            console.log(path.join(req.session.lastPage, item.fileName));
             res.render('videoPlayer', {
                layout: req.session.layout,
                item: item,
@@ -109,27 +110,23 @@ router.post('/upload', function(req, res){
                res.redirect('/movies');
             }
             else {
-               var options = {
-				   url: 'http://api.themoviedb.org/3/search/movie',
-				   api_key: cfg.mdbKey,
-				   query: req.body.Title,
-				   page: 5,
-				   include_adult: false
-			   }
+        var options = {
+          url: 'http://api.themoviedb.org/3/search/movie?api_key=' + cfg.mdbKey + '&query=' + req.body.Title,
+          page: 5,
+          include_adult: false
+        }
 			   request.get(options, function(error, response, body){
 				   var feed = JSON.parse(body);
 				   console.log(feed);
+           
 
-				   feed[0].fileName = req.file.fileName;
+				   feed.results[0].fileName = req.file.fileName;
 				   
-				   if(feed.response == false){
-                      feed.Poster = defaultImage;
-                   }
                    res.render('editMedia',{
                          layout: req.session.layout,
                          message: 'File Upload Successful',
                          type: 'movies',
-                         object: feed
+                         object: feed.results[0]
                      });
 
 			   })
@@ -263,10 +260,83 @@ router.post('/update', function(req, res) {
 
 router.get('/watch_movie', function(req, res){
   var videoId = req.query.video_id;
-  var rstream = fs.createReadStream('public/videos/userVideo-1468546694273');
-  rstream.pipe(res);
+  fs.stat('public/videos/' + videoId, function(err, stats) {
+    if (err) {
+      if (err.code === 'ENOENT') {
+        return res.sendStatus(404);
+      }
+      res.end(err);
+    }
+    var range = req.headers.range;
+    if (!range) {
+      return res.sendStatus(416);
+    }
+
+    var positions = range.replace(/bytes=/, "").split("-");
+    var start = parseInt(positions[0], 10);
+    var total = stats.size;
+    var end = positions[1] ? parseInt(positions[1], 10) : total - 1;
+    var chunksize = (end - start) + 1;
+
+    res.writeHead(206, {
+      "Content-Range": "bytes " + start + "-" + end + "/" + total,
+      "Accept-Ranges": "bytes",
+      "Content-Length": chunksize,
+      "Content-Type": "video/mp4"
+    });
+
+    var stream = fs.createReadStream('public/videos/' + videoId, { start: start, end: end })
+      .on("open", function() {
+        stream.pipe(res);
+      }).on("error", function(err) {
+        res.end(err);
+      });
+  });
+//  var rstream = fs.createReadStream('public/videos/' + videoId);
+//  rstream.pipe(res);
 });
 
+router.post('/submit_video/', function(req, res) {
+console.log(req.body);
+  if(req.body.title != '') {
+    upload(req, res, function(err) {
+      if(err) {
+        res.status(400);
+        res.send('File upload was unsuccessful');
+      }
+      else {
+        var options = {
+          url: 'http://api.themoviedb.org/3/search/movie?api_key=' + cfg.mdbKey + '&query=' + req.body.Title,
+          page: 5,
+          include_adult: false
+        }
+        request.get(options, function(error, response, body){
+          var feed = JSON.parse(body);
+          console.log(feed);
+				   
+          res.send(feed);
+        })
+      }
+    });
+  }
+  else {
+     req.session.message = 'Movie title required to upload a video';
+     res.redirect('/movies');
+  }
+});
+
+router.get('/get_video_info/', function(req, res){
+  Users.findOne({'fileName': req.query.videoId}, 'videos', function(item) {
+    if(!item){
+      res.status(404);
+      res.send('Error finding video in the database' + Date());
+    } else {
+      delete item._id;
+      console.log(req.session.userName + ' is watching ' + item.Title);
+      res.send(item);
+    }
+  });
+});
 
 module.exports = router
 
